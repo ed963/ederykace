@@ -1,0 +1,81 @@
+.grace:hover{
+    color: #561acd
+    ;
+}
+.grace{
+    padding: 5px 5px;
+
+}
+
+.grace {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+  
+  /* Tooltip text */
+  .grace .popover {
+    visibility: hidden;
+    width: 120px;
+    border: 2px solid #561acd;
+    background-color: white;
+    color: #8c53ff ;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .grace:hover .popover {
+    visibility: visible;
+  }
+
+  .grace .popover {
+    height: 200px;
+    width: 300px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -150px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-family:'Courier New';
+    padding: 10px;
+    overflow-y: scroll;
+    
+  }
+.grace .popover span {
+    text-align: left;
+}
+
+.grace .popover span:first-child {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 24px;
+}
+
+.grace .popover::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .grace .popover::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  .grace .popover::-webkit-scrollbar-thumb {
+    background: #8c53ff; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  .grace .popover::-webkit-scrollbar-thumb:hover {
+    background: #561acd; 
+  }
