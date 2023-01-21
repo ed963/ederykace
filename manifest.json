@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Ederykace",
+  "short_name": "EDGE",
+  "description": "Explains acronyms, slang, regional words on hover",
+  "version": "1.0",
+  "action": {
+    "default_title": "Click me",
+    "default_icon": {
+      "16": "images/default_icon.JPG",
+      "24": "images/default_icon.JPG",
+      "48": "images/default_icon.JPG"
+    },
+    "default_popup": "popup/default_popup.html"
+  },
+  "icons": {
+    "16": "images/default_icon.JPG",
+    "32": "images/default_icon.JPG",
+    "48": "images/default_icon.JPG",
+    "128": "images/default_icon.JPG"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": [
+        "https://developer.chrome.com/docs/extensions/*",
+        "https://developer.chrome.com/docs/webstore/*"
+      ]
+    }
+  ]
+}
