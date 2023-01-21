@@ -1,2 +1,2 @@
 <3
-- Derek Yi, Edwin Jiang, Eryka Shi-Shun, Grace Leung
+By Derek Yi, Edwin Jiang, Eryka Shi-Shun, Grace Leung
