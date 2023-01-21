@@ -21,11 +21,14 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/content.js"],
+      "js": ["scripts/grace.js"],
+      "css": ["grace.css"],
+      "all_frames": true,
       "matches": [
         "https://developer.chrome.com/docs/extensions/*",
         "https://developer.chrome.com/docs/webstore/*"
-      ]
+      ],
+      "run_at": "document_end"
     }
   ]
 }
