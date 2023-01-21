@@ -1,9 +1,0 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-.grace:hover{
-    background-color: #fdff32;
-    border: 2px solid black;
-    border-radius: 5px;
-}
-.grace{
-    padding: 5px 5px;
-}
