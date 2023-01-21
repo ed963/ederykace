@@ -21,7 +21,7 @@
   },
   "content_scripts": [
     {
-      "js": ["scripts/grace.js"],
+      "js": ["scripts/content.js"],
       "css": ["grace.css"],
       "all_frames": true,
       "matches": [
@@ -29,6 +29,16 @@
         "https://developer.chrome.com/docs/webstore/*"
       ],
       "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data/slang_dataset.json",
+        "scripts/slang_lib.js",
+        "scripts/main.js"
+      ],
+      "matches": ["<all_urls>"]
     }
   ]
 }
