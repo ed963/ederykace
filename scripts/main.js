@@ -11,7 +11,7 @@ export function main() {
                 let slang_list = get_slang(slang_dataset, text);
 
                 slang_list.forEach((word) => {
-                    define_word(word)
+                    define_word(slang_dataset, word)
                         .then((data) => {
                             const definition = data["definition"];
                             const usage = data["usage"];
