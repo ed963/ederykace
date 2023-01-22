@@ -59,7 +59,7 @@ sweet Jesus
 turd
 twat
 wanker
-whore`.replace("\t", " ").split("\n")
+whore`.split("\n")
 }
 
 
