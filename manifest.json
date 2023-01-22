@@ -32,6 +32,7 @@
       "resources": [
         "data/slang_dataset.json",
         "scripts/slang_lib.js",
+        "scripts/clean.js",
         "scripts/main.js"
       ],
       "matches": ["<all_urls>"]

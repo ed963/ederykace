@@ -1,6 +1,6 @@
 
-
-OFFENSIVE_WORDS = `fuck
+function offensiveWords(){
+    return `fuck
 shit
 cock
 titties
@@ -37,6 +37,7 @@ damn it
 dick
 dickhead
 dyke
+faggot
 fatherfucker
 frigger
 goddamn
@@ -53,14 +54,13 @@ shit
 shite
 sisterfucker
 slut
-son of a bitch
-son of a whore
 spastic
 sweet Jesus
 turd
 twat
-wanker`
-
+wanker
+whore`.replace("\t", " ").split("\n")
+}
 
 
 function isVowel(c) {
@@ -77,36 +77,33 @@ function censorFirstVowel(word){
     
 }
 
-function offensiveWords(){
-    return OFFENSIVE_WORDS.split("\n")
-}
 
-function clean(text){
-    offensiveWords = offensiveWords()
-    
+
+function censor(text){
+    let offensiveWordsList = offensiveWords()
     // newText = text.strip()
-    newText = text.replace(/(\r\n|\n|\r)/gm, "");
-    textList = newText.split(" ")
-    for(let i = 0; i < offensiveWords.length; i++){
-        while(textList.includes(offensiveWords[i])){
-            console.log(textList)
-            wordIndex = newText.search(offensiveWords[i])
-            console.log(wordIndex)
+    let newText = text.replace("\r", " ").replace("\n", " ").replace("\r\n", " ");
+    let textList = newText.split(" ")
+    // console.log(textList)
+    for(let i = 0; i < offensiveWordsList.length; i++){
+        while(textList.includes(offensiveWordsList[i])){
+            // console.log(textList)
+            let wordIndex = newText.search(offensiveWordsList[i])
+            // console.log(wordIndex)
             newText = newText.substring(0,wordIndex) + censorFirstVowel(newText.substring(wordIndex))
             textList = newText.split(" ")
         }
         
     }
-    console.log(newText)
     return newText
     
 }
 
 
-
-clean(`
-Word: rizz
-Definition: Another word for spitting game/how good you are with pulling and sustaining bitches.
-Example: Person 1: are you from Tennessee cuz u the only ten i see ;)
-Person watching from a far:Damn, that nigga has no rizz
-`)
+export {censor};
+// clean(`
+// Word: rizz
+// Definition: Another word for spitting game/how good you are with pulling and sustaining bitches.
+// Example: Person 1: are you from Tennessee cuz u the only ten i see ;)
+// Person watching from a far:Damn, that nigga has no rizz
+// `)
