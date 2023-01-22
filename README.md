@@ -22,6 +22,12 @@ npm install
 
 5. To see a definition and example usage, simply hover over the highlighted word.
 
+## Acknowledgements
+
+s(lang) makes use of the Internet Slang Dataset, which contains over 7500 common acronyms and slang words along with their definitions. 
+
+The dataset has been made publically available by Hitanshu Tiwari, and is available for download on his website: [https://floatcode.wordpress.com/2015/11/28/internet-slang-dataset/](https://floatcode.wordpress.com/2015/11/28/internet-slang-dataset/)
+
 ---
 
 <3
