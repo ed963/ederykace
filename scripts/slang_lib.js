@@ -35,7 +35,7 @@ async function define_word(word) {
         const definition_promise = call_cohere_api(generate_cohere_definition_prompt(json));
         const usage_promise = call_cohere_api(generate_cohere_usage_prompt(json));
         const generated_text = await Promise.all([definition_promise, usage_promise]);
-        return { "definition": generated_text[0], "usage": generated_text[1] };
+        return { "definition": generated_text[0].replace("--", " "), "usage": generated_text[1].replace("--", " ") };
     } catch (e) {
         return console.error(`ERROR: ${e.message}`);
     }
@@ -56,7 +56,7 @@ function generate_cohere_definition_prompt(raw) {
         }
     }
     // console.log(prompt)
-    // prompt = prompt.replaceAll('[', '').replaceAll(']', '');
+    prompt = censor(prompt.replaceAll('[', '').replaceAll(']', ''));
     return prompt;
 }
 
@@ -109,6 +109,10 @@ async function call_cohere_api(prompt) {
     
     try {
         const response = await fetch("https://api.cohere.ai/generate", options);
+        // console.log(response)
+        if (response.status== 498){
+            return "The usage examples found were too offensive and could not be computed"
+        }
         const json = await response.json();
         return json["generations"][0]["text"];
     } catch (e) {
