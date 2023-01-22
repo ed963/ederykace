@@ -2,13 +2,7 @@ import { load_slang_dataset, get_slang, define_word } from "./slang_lib.js";
 
 const words = document.querySelectorAll("p");
 
-export function main() {
-    // TODO: Remove this testing code. Poggers !
-    // define_word("poggers").then((data) => {
-    //     console.log(`Definition: ${data["definition"]}`);
-    //     console.log(`Usage: ${data["usage"]}`);
-    // })
-    
+export function main() {    
     load_slang_dataset()
         .then((slang_dataset) => {
             for (let i = 0; i < words.length; i++) {

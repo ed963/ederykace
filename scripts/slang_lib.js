@@ -9,7 +9,7 @@ async function load_slang_dataset() {
     try {
         const response = await fetch(url);
         const json = await response.json();
-        json["and"] = "Not a real slang word :>" // Adding "and" to slang database for testing purposes
+        // json["and"] = "Not a real slang word :>" // Adding "and" to slang database for testing purposes
         return json;
     } catch (e) {
         return console.error(`ERROR: ${e.message}`);
