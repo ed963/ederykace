@@ -5,7 +5,6 @@
   "description": "Explains acronyms, slang, regional words on hover",
   "version": "1.0",
   "action": {
-    "default_title": "idk",
     "default_icon": {
       "16": "images/idk128.png",
       "24": "images/idk128.png",
