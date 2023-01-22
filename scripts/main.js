@@ -3,6 +3,11 @@ import { is_slang, define_word } from "./slang_lib.js";
 const words = document.querySelectorAll("p");
 let acronymsAndSlang = ["and"];
 export function main() {
+    // TODO: Remove this testing code. Poggers !
+    // define_word("poggers").then((data) => {
+    //     console.log(`Definition: ${data["definition"]}`);
+    //     console.log(`Usage: ${data["usage"]}`);
+    // })
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     console.log(word.innerHTML.includes("and"));
