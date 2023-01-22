@@ -11,7 +11,6 @@ export function main() {
     
     load_slang_dataset()
         .then((slang_dataset) => {
-            console.log("SD" + slang_dataset);
             for (let i = 0; i < words.length; i++) {
                 let text_element = words[i];
                 let text = text_element.textContent;
