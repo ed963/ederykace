@@ -1,4 +1,7 @@
+import { censor } from "./clean.js";
+
 let slang_dataset;
+
 
 const url = chrome.runtime.getURL('data/slang_dataset.json');
 
@@ -28,6 +31,7 @@ async function define_word(word) {
     try {
         const response = await fetch(`https://api.urbandictionary.com/v0/define?term=${word}`);
         const json = await response.json();
+        // console.log(json)
         const definition_promise = call_cohere_api(generate_cohere_definition_prompt(json));
         const usage_promise = call_cohere_api(generate_cohere_usage_prompt(json));
         const generated_text = await Promise.all([definition_promise, usage_promise]);
@@ -42,13 +46,18 @@ async function define_word(word) {
  * that can be given to the co:here API to generate a definition.
  */
 function generate_cohere_definition_prompt(raw) {
-    // const response_list = raw["list"];
-    // let prompt = "Give a definition for the word made up of complete sentences. Here are some examples: \n";
+    const response_list = raw["list"];
 
-    // for (let i = 0; i < response_list.length; i++) {
-    //     if 
-    // }
-    return raw["list"][0]["description"];
+    let prompt = `Define the word ${response_list[0]["word"]} based on these examples: \n`;
+
+    for (let i = 0; i < response_list.length; i++) {
+        if (response_list[i]["definition"]){
+            prompt += `${response_list[i]["definition"]} \n--\n`
+        }
+    }
+    // console.log(prompt)
+    // prompt = prompt.replaceAll('[', '').replaceAll(']', '');
+    return prompt;
 }
 
 /**
@@ -56,7 +65,20 @@ function generate_cohere_definition_prompt(raw) {
  * that can be given to the co:here API to generate a usage example.
  */
 function generate_cohere_usage_prompt(raw) {
-    return raw["list"][0]["example"];
+    const response_list = raw["list"];
+    let prompt = `Use the word ${response_list[0]["word"]} in a full sentence based on these examples:\n`;
+
+    for (let i = 0; i < response_list.length; i++) {
+        // if (response_list[i]["definition"] && response_list[i]["example"]){
+        //     prompt += `\nDefinition: ${response_list[i]["definition"]} \nExample: ${response_list[i]["example"]}\n--`
+        // } else
+        if (response_list[i]["example"]){
+            prompt += `${response_list[i]["example"]}\n--\n`
+        }
+    }
+    // console.log(prompt)
+    prompt = censor(prompt.replaceAll('[', '').replaceAll(']', ''));
+    return prompt;
 }
 
 /**
@@ -67,15 +89,15 @@ async function call_cohere_api(prompt) {
     let options = {
         "method": "post",
         "headers": {
-            "Authorization": "BEARER 2baamhXU7PaTWd6ateUvFRWxexag6fNhG77IsXeS",
+            "Authorization": "BEARER X6RH1jZEUsCf3cqGZhwW07Fecg8qSODah2qSHBFm",
             "Content-Type": "application/json",
             "Cohere-Version": "2022-12-06"
         },
         "body": JSON.stringify({
             "model": "command-xlarge-nightly",
             "prompt": `${prompt}`,
-            "max_tokens": 100,
-            "temperature": 0.3,
+            "max_tokens": 150,
+            "temperature": 0.25,
             "k": 0,
             "p": 1,
             "frequency_penalty": 0,
