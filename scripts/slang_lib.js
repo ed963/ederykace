@@ -9,7 +9,7 @@ async function load_slang_dataset() {
     try {
         const response = await fetch(url);
         const json = await response.json();
-        json["and"] = "Not a real slang word :>" // Adding "and" to slang database for testing purposes
+        // json["and"] = "Not a real slang word :>" // Adding "and" to slang database for testing purposes
         return json;
     } catch (e) {
         return console.error(`ERROR: ${e.message}`);
@@ -47,10 +47,13 @@ function get_slang(slang_dataset, text) {
  *      "usage": <usage>
  * }
  */
-async function define_word(word) {
+async function define_word(slang_dataset, word) {
     try {
         const response = await fetch(`https://api.urbandictionary.com/v0/define?term=${word}`);
         const json = await response.json();
+        if (!json["list"]) {
+            return { "definition": slang_dataset[word], "usage": ""};
+        }
         // console.log(json)
         const definition_promise = call_cohere_api(generate_cohere_definition_prompt(json));
         const usage_promise = call_cohere_api(generate_cohere_usage_prompt(json));
