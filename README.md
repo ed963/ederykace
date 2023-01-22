@@ -22,5 +22,7 @@ npm install
 
 5. To see a definition and example usage, simply hover over the highlighted word.
 
+---
+
 <3
 By Derek Yi, Edwin Jiang, Eryka Shi-Shun, Grace Leung
