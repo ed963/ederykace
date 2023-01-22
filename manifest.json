@@ -23,10 +23,7 @@
       "js": ["scripts/content.js"],
       "css": ["main.css"],
       "all_frames": true,
-      "matches": [
-        "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*"
-      ],
+      "matches": ["*://*/*"],
       "run_at": "document_end"
     }
   ],
