@@ -1,35 +1,41 @@
-import { is_slang, define_word } from "./slang_lib.js";
+import { load_slang_dataset, get_slang, define_word } from "./slang_lib.js";
 
 const words = document.querySelectorAll("p");
 
 export function main() {
     // TODO: Remove this testing code. Poggers !
-    console.log(`sending API call...`);
-    define_word("meme").then((data) => {
-        console.log(`Definition: ${data["definition"]}`);
-        console.log(`Usage: ${data["usage"]}`);
-    })
-  for (let i = 0; i < words.length; i++) {
-    let word = words[i];
-    console.log(is_slang(word));
-    if (is_slang(word)) {
-        define_word(word)
-            .then((data) => {
-                const definition = data["definition"];
-                const usage = data["usage"];
+    // define_word("poggers").then((data) => {
+    //     console.log(`Definition: ${data["definition"]}`);
+    //     console.log(`Usage: ${data["usage"]}`);
+    // })
+    
+    load_slang_dataset()
+        .then((slang_dataset) => {
+            console.log("SD" + slang_dataset);
+            for (let i = 0; i < words.length; i++) {
+                let text_element = words[i];
+                let text = text_element.textContent;
+                let slang_list = get_slang(slang_dataset, text);
 
-                word.innerHTML = word.innerHTML.replaceAll(word,
-                    "<span class='grace'>" +
-                    word +
-                    "<span class='popover'>" + 
-                    `<span><b>Word:</b> ${word}</span>` + 
-                    `<span><b>Definition: ${definition}</b></span>` +
-                    `<span><b>Example:</b> ${usage}</span></span></span>`
-                );
-
-            })
-    }
-  }
+                slang_list.forEach((word) => {
+                    define_word(word)
+                        .then((data) => {
+                            const definition = data["definition"];
+                            const usage = data["usage"];
+        
+                            text_element.innerHTML = text_element.innerHTML.replaceAll(word,
+                                "<span class='grace'>" +
+                                word +
+                                "<span class='popover'>" + 
+                                `<span><b>Word:</b> ${word}</span>` + 
+                                `<span><b>Definition: ${definition}</b></span>` +
+                                `<span><b>Example:</b> ${usage}</span></span></span>`
+                            );
+        
+                        }) 
+                });
+            }
+        })
 }
 
 // import { is_slang, define_word } from "./slang_lib.js";
