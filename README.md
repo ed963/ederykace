@@ -22,6 +22,8 @@ npm install
 
 5. To see a definition and example usage, simply hover over the highlighted word.
 
+![Definition example](/images/example.png)
+
 ## Acknowledgements
 
 s(lang) makes use of the Internet Slang Dataset, which contains over 7500 common acronyms and slang words along with their definitions. 
