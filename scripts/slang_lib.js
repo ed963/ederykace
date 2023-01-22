@@ -20,14 +20,21 @@ async function load_slang_dataset() {
  * Return whether the given word is in slang_dataset.
  */
 function is_slang(slang_dataset, word) {
-    return word in slang_dataset;
+    return word.toLowerCase() in slang_dataset;
 }
 
 /**
  * Return an array of the slang words in the given text.
  */
 function get_slang(slang_dataset, text) {
-    return text.match(/\b(\w+)\b/g).filter(word => is_slang(slang_dataset, word));
+    let words = text.match(/\b(\w+)\b/g);
+    if (words) {
+        return words.filter(word => is_slang(slang_dataset, word));
+    }
+    else {
+        return [];
+    }
+    
 }
 
 /**
