@@ -5,19 +5,18 @@
   "description": "Explains acronyms, slang, regional words on hover",
   "version": "1.0",
   "action": {
-    "default_title": "Click me",
     "default_icon": {
-      "16": "images/icon128.png",
-      "24": "images/icon128.png",
-      "48": "images/icon128.png"
+      "16": "images/idk128.png",
+      "24": "images/idk128.png",
+      "48": "images/idk128.png"
     },
     "default_popup": "popup/default_popup.html"
   },
   "icons": {
-    "16": "images/icon128.png",
-    "32": "images/icon128.png",
-    "48": "images/icon128.png",
-    "128": "images/icon128.png"
+    "16": "images/idk128.png",
+    "32": "images/idk128.png",
+    "48": "images/idk128.png",
+    "128": "images/idk128.png"
   },
   "content_scripts": [
     {
