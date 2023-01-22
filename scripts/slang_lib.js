@@ -1,20 +1,33 @@
 import { censor } from "./clean.js";
 
-let slang_dataset;
-
-
-const url = chrome.runtime.getURL('data/slang_dataset.json');
-
-fetch(url)
-    .then((response) => response.json())
-    .then((json) => {slang_dataset = new Set(json); slang_dataset.add("and");}) // Adding "and" to slang database for testing purposes
-    .catch((e) => console.error(`ERROR: ${e.message}`));
+/**
+ * Return a promise which resolves into an object mapping slang words
+ * to their definitions.
+ */
+async function load_slang_dataset() {
+    const url = chrome.runtime.getURL('data/slang_dataset.json');
+    try {
+        const response = await fetch(url);
+        const json = await response.json();
+        json["and"] = "Not a real slang word :>" // Adding "and" to slang database for testing purposes
+        return json;
+    } catch (e) {
+        return console.error(`ERROR: ${e.message}`);
+    }
+}
 
 /**
- * Return whether the given word is a slang word.
+ * Return whether the given word is in slang_dataset.
  */
-function is_slang(word) {
+function is_slang(slang_dataset, word) {
     return word in slang_dataset;
+}
+
+/**
+ * Return an array of the slang words in the given text.
+ */
+function get_slang(slang_dataset, text) {
+    return text.match(/\b(\w+)\b/g).filter(word => is_slang(slang_dataset, word));
 }
 
 /**
@@ -120,4 +133,4 @@ async function call_cohere_api(prompt) {
     }
 }
 
-export {is_slang, define_word};
+export {load_slang_dataset, get_slang, define_word};
